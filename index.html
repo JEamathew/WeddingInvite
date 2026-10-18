@@ -7,148 +7,291 @@
 <meta name="description" content="Jewel Eapen Mathew and Ireen Maria Philip invite you to their wedding on 4 January 2027.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #f7f1e6;
-    --card: #fffcf6;
-    --ink: #3b3226;
-    --muted: #7a6c58;
-    --gold: #b08d4a;
-    --gold-soft: #d9c49a;
+    --bg1: #fbf3ee;
+    --bg2: #f3e2dc;
+    --card: #fffaf6;
+    --ink: #4a3a33;
+    --muted: #8a7468;
+    --gold: #b38a4c;
+    --gold-light: #d9bf8c;
+    --blush: #e9b7b8;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; }
   body {
-    background: var(--bg);
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at 15% 10%, rgba(233,183,184,.35), transparent 40%),
+      radial-gradient(circle at 85% 90%, rgba(217,191,140,.30), transparent 45%),
+      linear-gradient(160deg, var(--bg1), var(--bg2));
     color: var(--ink);
     font-family: "Cormorant Garamond", Georgia, serif;
     font-size: 19px;
     line-height: 1.55;
-    padding: 32px 16px 48px;
+    padding: 40px 16px 56px;
+    overflow-x: hidden;
   }
+
+  /* falling petals */
+  .petals { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+  .petal {
+    position: absolute;
+    top: -40px;
+    width: 14px; height: 18px;
+    background: radial-gradient(ellipse at 30% 30%, #f8d6d6, #e3a1a5 70%);
+    border-radius: 80% 0 80% 0;
+    opacity: .75;
+    animation: fall linear infinite, sway ease-in-out infinite alternate;
+  }
+  @keyframes fall { to { transform: translateY(110vh) rotate(540deg); } }
+  @keyframes sway { from { margin-left: -30px; } to { margin-left: 30px; } }
+
   .card {
-    max-width: 560px;
+    position: relative;
+    z-index: 1;
+    max-width: 580px;
     margin: 0 auto;
     background: var(--card);
-    border: 1px solid var(--gold-soft);
-    outline: 1px solid var(--gold-soft);
-    outline-offset: -12px;
-    padding: 56px 32px 48px;
+    padding: 96px 36px 88px;
     text-align: center;
-    box-shadow: 0 10px 30px rgba(80, 60, 30, 0.08);
+    border-radius: 4px;
+    box-shadow: 0 20px 50px rgba(120, 80, 60, .14), 0 2px 6px rgba(120, 80, 60, .06);
+    overflow: hidden;
   }
-  .cross { color: var(--gold); font-size: 26px; line-height: 1; }
+  .card::before {
+    content: "";
+    position: absolute;
+    inset: 14px;
+    border: 1px solid var(--gold-light);
+    pointer-events: none;
+  }
+  .card::after {
+    content: "";
+    position: absolute;
+    inset: 19px;
+    border: 1px solid rgba(217,191,140,.45);
+    pointer-events: none;
+  }
+
+  .corner {
+    position: absolute;
+    width: 230px; height: 230px;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .corner.tl { top: -18px; left: -18px; }
+  .corner.br { bottom: -18px; right: -18px; transform: rotate(180deg); }
+
+  .content { position: relative; z-index: 3; }
+
+  .reveal { opacity: 0; transform: translateY(14px); animation: rise 1s ease forwards; }
+  .d1 { animation-delay: .2s; } .d2 { animation-delay: .5s; } .d3 { animation-delay: .8s; }
+  .d4 { animation-delay: 1.1s; } .d5 { animation-delay: 1.4s; } .d6 { animation-delay: 1.7s; }
+  @keyframes rise { to { opacity: 1; transform: none; } }
+
+  .cross { color: var(--gold); font-size: 24px; line-height: 1; }
   .intro {
-    margin-top: 20px;
+    margin-top: 18px;
     font-style: italic;
     color: var(--muted);
-    font-size: 18px;
+    font-size: 19px;
   }
   .names {
     font-family: "Great Vibes", cursive;
     font-weight: 400;
-    color: var(--ink);
-    font-size: 48px;
-    line-height: 1.15;
-    margin: 18px 0 6px;
+    font-size: 64px;
+    line-height: 1.05;
+    margin: 22px 0 8px;
+    background: linear-gradient(120deg, #9c7438, #d4b06e 45%, #a67d3f 70%, #c9a35f);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
   .amp {
     display: block;
-    font-size: 34px;
-    color: var(--gold);
-    margin: 4px 0;
+    font-size: 40px;
+    margin: 2px 0;
   }
   .full-names {
-    font-size: 15px;
-    letter-spacing: 0.18em;
+    font-size: 14px;
+    letter-spacing: .22em;
     text-transform: uppercase;
     color: var(--muted);
-    margin-top: 10px;
+    margin-top: 12px;
   }
-  .divider {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin: 36px auto;
-    max-width: 260px;
-    color: var(--gold);
-  }
-  .divider::before, .divider::after {
-    content: "";
-    flex: 1;
-    height: 1px;
-    background: var(--gold-soft);
-  }
-  .event { margin-bottom: 36px; }
-  .event:last-of-type { margin-bottom: 0; }
+
+  .sprig { display: block; margin: 34px auto; width: 180px; height: 40px; }
+
+  .event { margin-bottom: 8px; }
   .label {
-    font-size: 14px;
-    letter-spacing: 0.28em;
+    font-size: 13px;
+    letter-spacing: .32em;
     text-transform: uppercase;
     color: var(--gold);
     font-weight: 600;
   }
   .date {
-    font-size: 30px;
+    font-size: 31px;
     font-weight: 500;
     margin-top: 10px;
     line-height: 1.2;
   }
-  .time { font-size: 21px; margin-top: 4px; }
+  .time { font-size: 21px; margin-top: 2px; color: var(--ink); }
   .place { margin-top: 14px; }
-  .place strong { font-weight: 600; display: block; }
-  .note {
-    margin-top: 10px;
-    font-style: italic;
-    color: var(--muted);
-  }
+  .place strong { font-weight: 600; display: block; font-size: 21px; }
+  .note { margin-top: 10px; font-style: italic; color: var(--muted); }
   .map {
     display: inline-block;
-    margin-top: 16px;
-    padding: 8px 22px;
+    margin-top: 18px;
+    padding: 9px 26px;
     border: 1px solid var(--gold);
+    border-radius: 999px;
     color: var(--gold);
     text-decoration: none;
-    font-size: 14px;
-    letter-spacing: 0.16em;
+    font-size: 13px;
+    letter-spacing: .18em;
     text-transform: uppercase;
     font-weight: 600;
+    transition: background .25s, color .25s;
   }
-  .map:hover { background: var(--gold); color: var(--card); }
+  .map:hover, .map:focus-visible { background: var(--gold); color: var(--card); }
+
   .closing {
-    margin-top: 40px;
+    margin-top: 44px;
     font-style: italic;
     color: var(--muted);
+    font-size: 20px;
   }
-  @media (max-width: 420px) {
-    body { font-size: 18px; }
-    .card { padding: 48px 22px 40px; }
-    .names { font-size: 40px; }
+  .sign {
+    font-family: "Great Vibes", cursive;
+    color: var(--gold);
+    font-size: 30px;
+    margin-top: 8px;
+  }
+
+  @media (max-width: 480px) {
+    body { padding: 24px 12px 40px; font-size: 18px; }
+    .card { padding: 84px 22px 76px; }
+    .corner { width: 170px; height: 170px; }
+    .names { font-size: 52px; }
+    .amp { font-size: 34px; }
     .date { font-size: 26px; }
+    .intro br { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .petals { display: none; }
+    .reveal { animation: none; opacity: 1; transform: none; }
   }
 </style>
 </head>
 <body>
+  <!-- reusable flower shapes -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="rose" viewBox="-50 -50 100 100">
+        <circle r="46" fill="#f6d3d1"/>
+        <path d="M-44 8 C-40 -34 34 -40 44 0 C36 34 -34 40 -44 8Z" fill="#efbcbc"/>
+        <circle r="31" fill="#e8a6a8"/>
+        <path d="M-29 4 C-23 -25 24 -25 29 2 C21 23 -20 25 -29 4Z" fill="#df9195"/>
+        <circle r="17" fill="#d57d83"/>
+        <path d="M-15 2 C-10 -15 12 -15 15 0 C8 11 -8 12 -15 2Z" fill="#c96a72"/>
+        <path d="M-6 -2 C-2 -8 6 -6 5 0" stroke="#b5565f" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <path d="M-34 -22 C-14 -42 18 -40 36 -18" stroke="#fff" stroke-opacity=".45" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <path d="M-22 22 C-6 32 14 30 24 20" stroke="#fff" stroke-opacity=".3" stroke-width="2" fill="none" stroke-linecap="round"/>
+      </symbol>
+      <symbol id="leaf" viewBox="0 -14 80 28">
+        <path d="M0 0 C20 -16 52 -16 80 0 C52 16 20 16 0 0Z" fill="#9fb48f"/>
+        <path d="M2 0 C30 -2 52 -2 78 0" stroke="#7f976f" stroke-width="1.6" fill="none"/>
+      </symbol>
+      <symbol id="leaf2" viewBox="0 -14 80 28">
+        <path d="M0 0 C20 -16 52 -16 80 0 C52 16 20 16 0 0Z" fill="#b9c9a9"/>
+        <path d="M2 0 C30 -2 52 -2 78 0" stroke="#96ab86" stroke-width="1.4" fill="none"/>
+      </symbol>
+      <symbol id="bud" viewBox="-12 -16 24 32">
+        <ellipse cx="0" cy="-2" rx="8" ry="11" fill="#e39fa3"/>
+        <path d="M-9 4 C-6 12 6 12 9 4 C4 8 -4 8 -9 4Z" fill="#9fb48f"/>
+      </symbol>
+      <g id="corner-art">
+        <use href="#leaf" width="90" height="32" transform="translate(40 40) rotate(70)"/>
+        <use href="#leaf2" width="80" height="28" transform="translate(40 40) rotate(20)"/>
+        <use href="#leaf" width="95" height="34" transform="translate(70 70) rotate(5)"/>
+        <use href="#leaf2" width="85" height="30" transform="translate(70 70) rotate(85)"/>
+        <use href="#leaf" width="70" height="26" transform="translate(110 40) rotate(-25)"/>
+        <use href="#leaf2" width="70" height="26" transform="translate(40 115) rotate(115)"/>
+        <use href="#leaf" width="60" height="22" transform="translate(150 60) rotate(15)"/>
+        <use href="#leaf" width="60" height="22" transform="translate(60 150) rotate(75)"/>
+        <use href="#rose" x="135" y="18" width="62" height="62"/>
+        <use href="#rose" x="18" y="132" width="62" height="62"/>
+        <use href="#rose" x="38" y="38" width="96" height="96"/>
+        <use href="#bud" x="196" y="54" width="22" height="30" transform="rotate(20 207 69)"/>
+        <use href="#bud" x="54" y="196" width="22" height="30" transform="rotate(-20 65 211)"/>
+        <g fill="#d9bf8c">
+          <circle cx="205" cy="30" r="3"/><circle cx="216" cy="40" r="2"/><circle cx="196" cy="22" r="2"/>
+          <circle cx="30" cy="205" r="3"/><circle cx="40" cy="216" r="2"/><circle cx="22" cy="196" r="2"/>
+          <circle cx="160" cy="104" r="2.5"/><circle cx="104" cy="160" r="2.5"/>
+        </g>
+      </g>
+      <g id="sprig-art">
+        <path d="M10 20 H70 M110 20 H170" stroke="#d9bf8c" stroke-width="1"/>
+        <use href="#leaf2" width="26" height="10" transform="translate(88 20) rotate(200)"/>
+        <use href="#leaf2" width="26" height="10" transform="translate(92 20) rotate(-20)"/>
+        <use href="#rose" x="80" y="10" width="20" height="20"/>
+      </g>
+    </defs>
+  </svg>
+
+  <div class="petals" aria-hidden="true"></div>
+
   <main class="card">
-    <!-- A photo can go here later -->
-    <div class="cross">✝</div>
-    <p class="intro">With the blessings of God and our families,<br>we joyfully invite you to the wedding of</p>
+    <svg class="corner tl" viewBox="0 0 240 240" aria-hidden="true"><use href="#corner-art"/></svg>
+    <svg class="corner br" viewBox="0 0 240 240" aria-hidden="true"><use href="#corner-art"/></svg>
 
-    <h1 class="names">Jewel<span class="amp">&amp;</span>Ireen</h1>
-    <p class="full-names">Jewel Eapen Mathew &amp; Ireen Maria Philip</p>
+    <div class="content">
+      <div class="cross reveal d1">✝</div>
+      <p class="intro reveal d1">With the blessings of God and our families,<br>we joyfully invite you to the wedding of</p>
 
-    <div class="divider">❦</div>
+      <h1 class="names reveal d2">Jewel<span class="amp">&amp;</span>Ireen</h1>
+      <p class="full-names reveal d3">Jewel Eapen Mathew &amp; Ireen Maria Philip</p>
 
-    <section class="event">
-      <p class="label">Holy Matrimony</p>
-      <p class="date">Monday, 4 January 2027</p>
-      <p class="time">11:00 AM</p>
-      <p class="place"><strong>St Mary's Syrian Orthodox Church</strong>Manarcad, Kottayam</p>
-      <p class="note">Reception to follow at the church parish hall</p>
-      <a class="map" href="https://www.google.com/maps/search/?api=1&query=St+Mary%27s+Syrian+Orthodox+Church+Manarcad+Kottayam" target="_blank" rel="noopener">View map</a>
-    </section>
+      <svg class="sprig reveal d3" viewBox="0 0 180 40" aria-hidden="true"><use href="#sprig-art"/></svg>
 
-    <p class="closing">Your presence and prayers will make our day complete.</p>
+      <section class="event reveal d4">
+        <p class="label">Holy Matrimony</p>
+        <p class="date">Monday, 4 January 2027</p>
+        <p class="time">11:00 AM</p>
+        <p class="place"><strong>St Mary's Syrian Orthodox Church</strong>Manarcad, Kottayam</p>
+        <p class="note">Reception to follow at the church parish hall</p>
+        <a class="map" href="https://www.google.com/maps/search/?api=1&query=St+Mary%27s+Syrian+Orthodox+Church+Manarcad+Kottayam" target="_blank" rel="noopener">View map</a>
+      </section>
+
+      <p class="closing reveal d5">Your presence and prayers will make our day complete.</p>
+      <p class="sign reveal d6">Jewel &amp; Ireen</p>
+    </div>
   </main>
+
+  <script>
+    (function () {
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var box = document.querySelector('.petals');
+      var count = window.innerWidth < 500 ? 10 : 18;
+      for (var i = 0; i < count; i++) {
+        var p = document.createElement('span');
+        p.className = 'petal';
+        var size = 10 + Math.random() * 10;
+        p.style.left = (Math.random() * 100) + 'vw';
+        p.style.width = size + 'px';
+        p.style.height = (size * 1.3) + 'px';
+        var fall = 9 + Math.random() * 9;
+        var sway = 2.5 + Math.random() * 3;
+        p.style.animationDuration = fall + 's, ' + sway + 's';
+        p.style.animationDelay = (-Math.random() * fall) + 's, ' + (-Math.random() * sway) + 's';
+        p.style.opacity = (.45 + Math.random() * .4).toFixed(2);
+        box.appendChild(p);
+      }
+    })();
+  </script>
 </body>
 </html>
