@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jewel &amp; Ireen · Wedding</title>
+<meta name="description" content="Jewel Eapen Mathew and Ireen Maria Philip invite you to their wedding on 4 January 2027.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f1e6;
+    --card: #fffcf6;
+    --ink: #3b3226;
+    --muted: #7a6c58;
+    --gold: #b08d4a;
+    --gold-soft: #d9c49a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 19px;
+    line-height: 1.55;
+    padding: 32px 16px 48px;
+  }
+  .card {
+    max-width: 560px;
+    margin: 0 auto;
+    background: var(--card);
+    border: 1px solid var(--gold-soft);
+    outline: 1px solid var(--gold-soft);
+    outline-offset: -12px;
+    padding: 56px 32px 48px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(80, 60, 30, 0.08);
+  }
+  .cross { color: var(--gold); font-size: 26px; line-height: 1; }
+  .intro {
+    margin-top: 20px;
+    font-style: italic;
+    color: var(--muted);
+    font-size: 18px;
+  }
+  .names {
+    font-family: "Great Vibes", cursive;
+    font-weight: 400;
+    color: var(--ink);
+    font-size: 48px;
+    line-height: 1.15;
+    margin: 18px 0 6px;
+  }
+  .amp {
+    display: block;
+    font-size: 34px;
+    color: var(--gold);
+    margin: 4px 0;
+  }
+  .full-names {
+    font-size: 15px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 10px;
+  }
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 36px auto;
+    max-width: 260px;
+    color: var(--gold);
+  }
+  .divider::before, .divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--gold-soft);
+  }
+  .event { margin-bottom: 36px; }
+  .event:last-of-type { margin-bottom: 0; }
+  .label {
+    font-size: 14px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+  }
+  .date {
+    font-size: 30px;
+    font-weight: 500;
+    margin-top: 10px;
+    line-height: 1.2;
+  }
+  .time { font-size: 21px; margin-top: 4px; }
+  .place { margin-top: 14px; }
+  .place strong { font-weight: 600; display: block; }
+  .note {
+    margin-top: 10px;
+    font-style: italic;
+    color: var(--muted);
+  }
+  .map {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 8px 22px;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 14px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .map:hover { background: var(--gold); color: var(--card); }
+  .closing {
+    margin-top: 40px;
+    font-style: italic;
+    color: var(--muted);
+  }
+  @media (max-width: 420px) {
+    body { font-size: 18px; }
+    .card { padding: 48px 22px 40px; }
+    .names { font-size: 40px; }
+    .date { font-size: 26px; }
+  }
+</style>
+</head>
+<body>
+  <main class="card">
+    <!-- A photo can go here later -->
+    <div class="cross">✝</div>
+    <p class="intro">With the blessings of God and our families,<br>we joyfully invite you to the wedding of</p>
+
+    <h1 class="names">Jewel<span class="amp">&amp;</span>Ireen</h1>
+    <p class="full-names">Jewel Eapen Mathew &amp; Ireen Maria Philip</p>
+
+    <div class="divider">❦</div>
+
+    <section class="event">
+      <p class="label">Holy Matrimony</p>
+      <p class="date">Monday, 4 January 2027</p>
+      <p class="time">11:00 AM</p>
+      <p class="place"><strong>St Mary's Syrian Orthodox Church</strong>Manarcad, Kottayam</p>
+      <p class="note">Reception to follow at the church parish hall</p>
+      <a class="map" href="https://www.google.com/maps/search/?api=1&query=St+Mary%27s+Syrian+Orthodox+Church+Manarcad+Kottayam" target="_blank" rel="noopener">View map</a>
+    </section>
+
+    <p class="closing">Your presence and prayers will make our day complete.</p>
+  </main>
+</body>
+</html>
