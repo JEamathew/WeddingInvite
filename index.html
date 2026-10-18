@@ -185,6 +185,93 @@
     .petals { display: none; }
     .reveal { animation: none; opacity: 1; transform: none; }
   }
+
+  /* ===== opening card ===== */
+  body:not(.opened) { overflow: hidden; }
+  .reveal { animation-play-state: paused; }
+  body.revealed .reveal { animation-play-state: running; }
+  .intro-overlay {
+    position: fixed; inset: 0; z-index: 50;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 26px;
+    padding: 24px 16px;
+    background:
+      radial-gradient(circle at 15% 10%, rgba(233,183,184,.35), transparent 40%),
+      radial-gradient(circle at 85% 90%, rgba(217,191,140,.30), transparent 45%),
+      linear-gradient(160deg, var(--bg1), var(--bg2));
+    perspective: 1600px;
+    -webkit-user-select: none; user-select: none; -webkit-touch-callout: none;
+    touch-action: manipulation;
+    transition: opacity .8s ease 1s, visibility 0s linear 1.8s;
+  }
+  body.opened .intro-overlay { opacity: 0; visibility: hidden; }
+  .cover {
+    position: relative;
+    width: min(76vw, 340px); aspect-ratio: 3 / 4.1;
+    transform-style: preserve-3d;
+    cursor: pointer;
+    transition: transform .3s ease;
+    animation: floaty 4s ease-in-out infinite;
+  }
+  @keyframes floaty { 50% { transform: translateY(-6px); } }
+  .intro-overlay.holding .cover { animation: none; transform: scale(.975); }
+  .cover-inside, .face {
+    position: absolute; inset: 0;
+    background: var(--card);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .cover-inside {
+    box-shadow: 0 20px 50px rgba(120,80,60,.18);
+    display: flex; align-items: center; justify-content: center;
+    font-family: "Great Vibes", cursive; color: var(--gold); font-size: 30px;
+  }
+  .cover-front {
+    position: absolute; inset: 0;
+    transform-origin: left center;
+    transform-style: preserve-3d;
+    transition: transform 1.2s cubic-bezier(.6,.05,.3,1);
+  }
+  body.opened .cover-front { transform: rotateY(-168deg); }
+  .face { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+  .face.front {
+    box-shadow: 0 20px 50px rgba(120,80,60,.2), inset 0 0 0 1px rgba(217,191,140,.6);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 24px;
+  }
+  .face.front::before { content: ""; position: absolute; inset: 12px; border: 1px solid var(--gold-light); }
+  .face.back {
+    transform: rotateY(180deg);
+    background: linear-gradient(90deg, #f6ebe2, var(--card));
+  }
+  .face .corner { width: 150px; height: 150px; }
+  .face .corner.tl { top: -12px; left: -12px; }
+  .face .corner.br { bottom: -12px; right: -12px; }
+  .cover-kicker { font-size: 13px; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); font-weight: 600; position: relative; }
+  .cover-names {
+    font-family: "Great Vibes", cursive; font-weight: 400; font-size: 50px; line-height: 1.05; margin: 14px 0 12px;
+    background: linear-gradient(120deg, #9c7438, #d4b06e 45%, #a67d3f 70%, #c9a35f);
+    -webkit-background-clip: text; background-clip: text; color: transparent; position: relative;
+  }
+  .cover-date { font-size: 17px; letter-spacing: .14em; color: var(--muted); position: relative; }
+  .hold {
+    position: relative; width: 78px; height: 78px; border-radius: 50%;
+    border: none; background: rgba(255,250,246,.85); color: var(--gold);
+    box-shadow: 0 6px 18px rgba(120,80,60,.15);
+    cursor: pointer; display: grid; place-items: center;
+    -webkit-tap-highlight-color: transparent;
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse { 50% { box-shadow: 0 6px 18px rgba(120,80,60,.15), 0 0 0 10px rgba(217,191,140,.18); } }
+  .hold svg.ring { position: absolute; inset: 0; transform: rotate(-90deg); }
+  .hold .ring circle { fill: none; stroke: var(--gold); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 226; stroke-dashoffset: 226; transition: stroke-dashoffset .25s ease; }
+  .intro-overlay.holding .hold .ring circle { stroke-dashoffset: 0; transition: stroke-dashoffset .9s linear; }
+  .intro-overlay.holding .hold { animation: none; transform: scale(.94); }
+  .hold-label { font-style: italic; color: var(--muted); font-size: 18px; margin-top: -10px; }
+  @media (prefers-reduced-motion: reduce) {
+    .cover, .hold { animation: none; }
+    .cover-front { transition: none; }
+    .intro-overlay { transition: opacity .4s ease, visibility 0s linear .4s; }
+  }
 </style>
 </head>
 <body>
@@ -243,6 +330,28 @@
     </defs>
   </svg>
 
+  
+  <div class="intro-overlay" id="intro">
+    <div class="cover" id="cover" aria-hidden="true">
+      <div class="cover-inside">With love</div>
+      <div class="cover-front">
+        <div class="face front">
+          <svg class="corner tl" viewBox="0 0 240 240"><use href="#corner-art"/></svg>
+          <svg class="corner br" viewBox="0 0 240 240"><use href="#corner-art"/></svg>
+          <p class="cover-kicker">You're invited</p>
+          <p class="cover-names">Jewel<br>&amp; Ireen</p>
+          <p class="cover-date">4 · I · 2027</p>
+        </div>
+        <div class="face back"></div>
+      </div>
+    </div>
+    <button class="hold" id="hold" type="button" aria-label="Open the invitation">
+      <svg class="ring" viewBox="0 0 78 78" aria-hidden="true"><circle cx="39" cy="39" r="36"/></svg>
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 5 6.4 5c2 0 3.6 1.1 4.4 2.6h2.4C14 6.1 15.6 5 17.6 5 21 5 23.1 8.4 21.6 11.8 19.5 16.4 12 21 12 21z"/></svg>
+    </button>
+    <p class="hold-label">Press &amp; hold to open</p>
+  </div>
+
   <div class="petals" aria-hidden="true"></div>
 
   <main class="card">
@@ -251,7 +360,7 @@
 
     <div class="content">
       <div class="cross reveal d1">✝</div>
-      <p class="intro reveal d1">With the blessings of God and our families,<br>we joyfully invite you to the wedding of</p>
+      <p class="intro reveal d1">With the blessings of God and our families, <br>we joyfully invite you to the wedding of</p>
 
       <h1 class="names reveal d2">Jewel<span class="amp">&amp;</span>Ireen</h1>
       <p class="full-names reveal d3">Jewel Eapen Mathew &amp; Ireen Maria Philip</p>
@@ -291,6 +400,45 @@
         p.style.opacity = (.45 + Math.random() * .4).toFixed(2);
         box.appendChild(p);
       }
+    })();
+  </script>
+
+  <script>
+    (function () {
+      var ov = document.getElementById('intro');
+      if (!ov) return;
+      var timer = null, done = false;
+      function open() {
+        if (done) return;
+        done = true;
+        clearTimeout(timer);
+        ov.classList.remove('holding');
+        document.body.classList.add('opened');
+        if (navigator.vibrate) { try { navigator.vibrate(25); } catch (e) {} }
+        setTimeout(function () { document.body.classList.add('revealed'); }, 1100);
+      }
+      function start(e) {
+        if (done) return;
+        if (e.button !== undefined && e.button !== 0) return;
+        e.preventDefault();
+        ov.classList.add('holding');
+        timer = setTimeout(open, 900);
+      }
+      function cancel() {
+        if (done) return;
+        clearTimeout(timer);
+        ov.classList.remove('holding');
+      }
+      [document.getElementById('cover'), document.getElementById('hold')].forEach(function (el) {
+        el.addEventListener('pointerdown', start);
+        el.addEventListener('pointerup', cancel);
+        el.addEventListener('pointerleave', cancel);
+        el.addEventListener('pointercancel', cancel);
+      });
+      ov.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+      document.getElementById('hold').addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
+      });
     })();
   </script>
 </body>
